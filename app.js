@@ -11,13 +11,34 @@ client.connect((err) => {
     console.log("Connecting Successful");
 
     const db = client.db("TodoApp");
-    db.collection('Todos').find().count()
-    .then((count) => {
-        console.log("Todos:", count);
-        //console.log(JSON.stringify(docs, undefined, 2));
-    }, (err) => {
-        console.log("Unable to fetch todos", err);
+
+    db.collection("Users").deleteOne({_id: new ObjectID("6032170da215f4151c5760ec")})
+    .then(res => {
+        console.log("Success Result = ", res.result);
+    }, err => {
+        console.log("unable to delete records", err);
     });
+
+    // db.collection("Users").deleteMany({name: "Elisha"})
+    // .then(res => {
+    //     console.log("Success Result = ", res.result);
+    // }, err => {
+    //     console.log("unable to delete records");
+    // });
+
+    // db.collection("Todos").deleteOne({title: "To Buy Food"}).
+    // then(result => {
+    //     console.log("Success", result.result);
+    // }, err => {
+    //     console.log("Unable to delete record");
+    // })
+    // db.collection('Todos').find().count()
+    // .then((count) => {
+    //     console.log("Todos:", count);
+    //     //console.log(JSON.stringify(docs, undefined, 2));
+    // }, (err) => {
+    //     console.log("Unable to fetch todos", err);
+    //});
     // db.collection('Todos').insertOne({
     //     title: "To Buy Food",
     //     body: "buying food is really importatn so that you can continue eating",
