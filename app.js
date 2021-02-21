@@ -12,12 +12,29 @@ client.connect((err) => {
 
     const db = client.db("TodoApp");
 
-    db.collection("Users").deleteOne({_id: new ObjectID("6032170da215f4151c5760ec")})
-    .then(res => {
-        console.log("Success Result = ", res.result);
-    }, err => {
-        console.log("unable to delete records", err);
-    });
+    db.collection("Users").findOneAndUpdate({
+        _id: new ObjectID("6032133f4a94a723b87d3399"),
+    },{
+        $set: {
+            name: "Yashua Pervez",
+        },
+        $inc: {
+            age: +1,
+        }
+    },
+    {
+        returnOriginal: false
+    })
+    .then(result => {
+        console.log(result);
+    })
+
+    // db.collection("Users").deleteOne({_id: new ObjectID("6032170da215f4151c5760ec")})
+    // .then(res => {
+    //     console.log("Success Result = ", res.result);
+    // }, err => {
+    //     console.log("unable to delete records", err);
+    // });
 
     // db.collection("Users").deleteMany({name: "Elisha"})
     // .then(res => {
@@ -50,7 +67,7 @@ client.connect((err) => {
     //     console.log(JSON.stringify("New DOC", res.ops));
     // });
 
-    // db.collection('Users').insertOne({
+    // db.collection('Users').({
     //     name: "Pervez",
     //     age: 45,
     //     location: "Karachi",
